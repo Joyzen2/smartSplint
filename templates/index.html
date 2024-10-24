@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Splint Data Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+    <div class="header">
+        <h1>Smart Sensor Data Management System</h1>
+    </div>
+    <div class="patient-list">
+        <h1>Patients</h1>
+        <ul id="patientList"></ul>
+        <div class="button-group">
+            <button id="viewDetailBtn">View Detail</button>
+            <button id="viewHistoryBtn">View History</button>
+        </div>
+    </div>
+
+    <div class="patient-detail" id="patientDetail" style="display:block;">
+        <h1>Patient Detail</h1>
+        <div class="patient-info-container">
+            <div class="patient-avatar">
+                <img id="patientAvatar" src="{{ url_for('static', filename='img/patient1.jpg') }}" alt="Patient Avatar">
+            </div>
+            <div class="patient-info">
+                <p>Name: <span id="patientName"></span></p>
+                <p>Age: <span id="patientAge"></span></p>
+                <p>Gender: <span id="patientGender"></span></p>
+                <p>Phone: <span id="patientPhone"></span></p>
+            </div>
+        </div>
+
+        <div class="sensor-data">
+            <h2>Sensor Data</h2>
+            <div class="sensorData-grid">
+
+                <div class="temperature-grid">
+                    <img src="{{ url_for('static', filename='img/temperature.png') }}" alt="Temperature Image" class="grid-image">
+                    <span id="gridDescription" style="color: #f4857bb3;"> Temperature </span>
+                    <span id="temperatureData">--°C</span>
+                </div>
+
+                <div class="humidity-grid">
+                    <img src="{{ url_for('static', filename='img/humidity.png') }}" alt="Humidity Image" class="grid-image">
+                    <span id="gridDescription" style="color: #2dabfabd;"> Humidity </span>
+                    <span id="humidityData">--%</span>
+                </div>
+
+                <div class="status-grid">
+                    <img src="{{ url_for('static', filename='img/Description.png') }}" alt="description Image" class="grid-image">
+                    <span id="gridDescription" style="color: #4c5eebe4;"> Status </span>
+                    <span id="statusText">Disconnected</span>
+                </div>
+
+                <div class="proximal-grid">
+                    <img src="{{ url_for('static', filename='img/Proximal Pressure.png') }}" alt="proximal Image" class="grid-image">
+                    <span id="gridDescription" style="color: #95aae7;"> Proximal Pressure </span>
+                    <span id="proximalPressureData">--</span>
+                    <span id="proximalDataFeedback">--</span>
+                    <span id="progressContainer">
+                        <span id="proximalProgress"></span>
+                    </span>
+                </div>
+
+                <div class="break-grid">
+                    <img src="{{ url_for('static', filename='img/Break Pressure.png') }}" alt="Break Image" class="grid-image">
+                    <span id="gridDescription" style="color: #95aae7;"> Break Pressure </span>
+                    <span id="breakPressureData">--</span>
+                    <span id="breakDataFeedback">--</span>
+                    <span id="progressContainer">
+                        <span id="breakProgress"></span>
+                    </span>
+                </div>
+
+                <div class="distal-grid">
+                    <img src="{{ url_for('static', filename='img/Distal Pressure.png') }}" alt="Distal Image" class="grid-image">
+                    <span id="gridDescription" style="color: #95aae7;"> Distal Pressure </span>
+                    <span id="distalPressureData">--</span>
+                    <span id="distalDataFeedback">--</span>
+                    <span id="progressContainer">
+                        <span id="distalProgress"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="historyChart-container" style="display: none;">
+            <div class="chart-box">
+                <canvas id="temperatureHumidityChart"></canvas>
+            </div>
+            <div class="chart-box">
+                <canvas id="proximalPressureChart"></canvas>
+            </div>
+            <div class="chart-box">
+                <canvas id="breakPressureChart"></canvas>
+            </div>
+            <div class="chart-box">
+                <canvas id="distalPressureChart"></canvas>
+            </div>
+        </div>
+
+        <div class="loader" id="loader"></div>
+
+    </div>
+</body>
+
+<!-- 引入 JavaScript 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</html>
